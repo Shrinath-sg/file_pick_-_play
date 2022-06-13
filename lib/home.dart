@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/services/get_exchange.dart';
 import 'package:open_file/open_file.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -57,6 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Home Screen'),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        NetworkCall().getExchangeRates();
+      }),
       body: Center(
         child: isLoading
             ? Row(
