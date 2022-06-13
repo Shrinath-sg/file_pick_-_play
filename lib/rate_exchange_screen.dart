@@ -30,6 +30,7 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // log(data.length.toString());
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,8 +49,15 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                     itemCount: data.length,
                     itemBuilder: ((context, index) {
                       return ListTile(
+                        leading: CircleAvatar(
+                            child: Center(
+                          child: Text(data[index].name.toString()[0]),
+                        )),
                         title: Text(data[index].name),
-                        trailing: Text(data[index].value),
+                        trailing: Text(
+                          "\$ " + data[index].value,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
                       );
                     })),
       ),

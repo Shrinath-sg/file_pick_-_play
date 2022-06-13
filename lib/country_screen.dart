@@ -30,6 +30,8 @@ class _CountryListScreenState extends State<CountryListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // log(data.length.toString());
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,8 +50,14 @@ class _CountryListScreenState extends State<CountryListScreen> {
                     itemCount: data.length,
                     itemBuilder: ((context, index) {
                       return ListTile(
-                        title: Text(data[index].name),
-                        trailing: Text(data[index].value),
+                        leading: CircleAvatar(
+                            child: Center(
+                          child: Text(data[index].name.toString()[0]),
+                        )),
+                        title:
+                            Text(data[index].name + " - " + data[index].value),
+
+                        // trailing:
                       );
                     })),
       ),

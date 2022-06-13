@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task/country_screen.dart';
+import 'package:flutter_task/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CountryListScreen(),
+      home: const HomeScreen(),
     );
   }
 }
