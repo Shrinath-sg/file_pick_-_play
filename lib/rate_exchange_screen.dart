@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/services/get_exchange.dart';
 
 class ExchangeRateScreen extends StatefulWidget {
+  static const routeName = '/currency';
   const ExchangeRateScreen({Key? key}) : super(key: key);
 
   @override
@@ -13,16 +14,22 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
   bool isLoading = true;
   @override
   void initState() {
-    getData();
+    Future.delayed(Duration.zero, () => getData());
+
     super.initState();
   }
 
   getData() async {
-    data = await NetworkCall().getExchangeRates().catchError((e) {
-      setState(() {
-        isLoading = false;
+    var country = ModalRoute.of(context)?.settings.arguments;
+    if (country != null) {
+      data = await NetworkCall()
+          .getExchangeRates(country: country.toString())
+          .catchError((e) {
+        setState(() {
+          isLoading = false;
+        });
       });
-    });
+    }
     setState(() {
       isLoading = false;
     });

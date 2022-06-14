@@ -6,13 +6,13 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class NetworkCall {
-  Future<List> getExchangeRates() async {
+  Future<List> getExchangeRates({String? country}) async {
     var result = [];
     try {
       final response = await http
           .get(
             Uri.parse(
-                "https://api.apilayer.com/exchangerates_data/latest?&base=USD&apikey=dKVcuwxdT5jZGcfbThqhuv9H9FMybjHs"),
+                "https://api.apilayer.com/exchangerates_data/latest?&base=$country&apikey=dKVcuwxdT5jZGcfbThqhuv9H9FMybjHs"),
           )
           .timeout(const Duration(seconds: 30));
       log(response.body);
@@ -27,7 +27,7 @@ class NetworkCall {
             .toList();
         // var fetchedList = List<ExchangeRatesModelRates>.from(data['rates']
         //     .map((obj) => ExchangeRatesModelRates.fromJson(obj))).toList();
-        log(fetchedList[1].value.toString());
+        // log(fetchedList[1].value.toString());
         return result = fetchedList;
         // Fluttertoast.showToast(msg: 'Order placed Successfully!');
 
@@ -64,12 +64,15 @@ class NetworkCall {
       if (response.statusCode == 200) {
         var data = json['symbols'] as Map;
         // log(jsonEncode(data));
+        // "AED": "United Arab Emirates Dirham",
         var fetchedList = data.entries
             .map((e) => Country(name: e.key, value: e.value.toString()))
             .toList();
+
+        // [{"AED":"United Arab Emirates Dirham"},{"AED":"United Arab Emirates Dirham"}]
         // var fetchedList = List<ExchangeRatesModelRates>.from(data['rates']
         //     .map((obj) => ExchangeRatesModelRates.fromJson(obj))).toList();
-        log(fetchedList[1].value.toString());
+
         return result = fetchedList;
         // Fluttertoast.showToast(msg: 'Order placed Successfully!');
 

@@ -1,11 +1,6 @@
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_task/country_screen.dart';
 import 'package:flutter_task/rate_exchange_screen.dart';
-import 'package:open_file/open_file.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,42 +10,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isLoading = false;
+  // bool isLoading = false;
 
-  openFile() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
+  // openFile() async {
+  //   try {
+  //     setState(() {
+  //       isLoading = true;
+  //     });
 
-      final file = await pickFile();
-      setState(() {
-        isLoading = false;
-      });
-      if (file == null) return;
-      log('Path--> ${file.path}');
-      OpenFile.open(file.path);
-    } catch (err) {
-      setState(() {
-        isLoading = false;
-      });
-      log(err.toString());
-    }
-  }
+  //     final file = await pickFile();
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     if (file == null) return;
+  //     log('Path--> ${file.path}');
+  //     OpenFile.open(file.path);
+  //   } catch (err) {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     log(err.toString());
+  //   }
+  // }
 
-  Future<File?> pickFile() async {
-    try {
-      final result = await FilePicker.platform.pickFiles(
-        allowedExtensions: ['mp4'],
-        type: FileType.custom,
-      );
-      if (result == null) return null;
-      return File(result.files.first.path!);
-    } catch (e) {
-      log(e.toString());
-    }
-    return null;
-  }
+  // Future<File?> pickFile() async {
+  //   try {
+  //     final result = await FilePicker.platform.pickFiles(
+  //       allowedExtensions: ['mp4'],
+  //       type: FileType.custom,
+  //     );
+  //     if (result == null) return null;
+  //     return File(result.files.first.path!);
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {

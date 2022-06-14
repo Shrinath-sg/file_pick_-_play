@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/rate_exchange_screen.dart';
 import 'package:flutter_task/services/get_exchange.dart';
 
 class CountryListScreen extends StatefulWidget {
@@ -19,6 +20,9 @@ class _CountryListScreenState extends State<CountryListScreen> {
 
   getData() async {
     data = await NetworkCall().getCountryList().catchError((e) {
+      // setState(() {
+
+      // });
       setState(() {
         isLoading = false;
       });
@@ -38,7 +42,7 @@ class _CountryListScreenState extends State<CountryListScreen> {
           title: const Text('Country list'),
           centerTitle: true,
         ),
-        body: isLoading
+        body: isLoading == true
             ? const Center(
                 child: CircularProgressIndicator(),
               )
@@ -50,6 +54,9 @@ class _CountryListScreenState extends State<CountryListScreen> {
                     itemCount: data.length,
                     itemBuilder: ((context, index) {
                       return ListTile(
+                        onTap: (() => Navigator.pushNamed(
+                            context, ExchangeRateScreen.routeName,
+                            arguments: data[index].name.toString())),
                         leading: CircleAvatar(
                             child: Center(
                           child: Text(data[index].name.toString()[0]),
